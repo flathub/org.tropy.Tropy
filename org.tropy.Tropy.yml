@@ -179,12 +179,12 @@ modules:
         npm_config_fund: 'false'
     sources:
       - type: archive
-        url: https://github.com/tropy/tropy/archive/refs/tags/v1.15.1.tar.gz
-        sha256: e4d1b7a36f5cc0c7cd1621b713d7aeb6a6988aa935d4e4d34a488789c85a9e62
+        url: https://github.com/tropy/tropy/archive/refs/tags/v1.15.2.tar.gz
+        sha256: 25fb399b7b0470ccb7a30b2b2e93eac91691997ab8d6099602ce7f8298ebdfeb
         dest: tropy
       - type: file
-        url: https://sqlite.org/2023/sqlite-autoconf-3430100.tar.gz
-        sha256: 39116c94e76630f22d54cd82c3cea308565f1715f716d1b2527f1c9c969ba4d9
+        url: https://www.sqlite.org/2023/sqlite-autoconf-3430200.tar.gz
+        sha256: 6d422b6f62c4de2ca80d61860e3a3fb693554d2f75bb1aaca743ccc4d6f609f0
       - generated-sources.json
       - type: file
         path: tropy.sh
@@ -197,7 +197,7 @@ modules:
       - |
         mv ../sqlite-autoconf* node_modules/sqlite3/deps
         node scripts/rebuild --skip-headers sqlite3
-        npx node-gyp rebuild --target=25.8.4 --verbose -C node_modules/sharp
+        npx node-gyp rebuild --target=25.9.2 --verbose -C node_modules/sharp
       - npm run build
       - |
         cd dist/Tropy-linux-*
