@@ -188,11 +188,8 @@ modules:
       - generated-sources.json
       - type: file
         path: tropy.sh
-      - type: file
-        path: org.tropy.Tropy.metainfo.xml
     subdir: tropy
     build-commands:
-      - cp ../org.tropy.Tropy.metainfo.xml res/linux/org.tropy.Tropy.metainfo.xml
       - install -Dm755 ../tropy.sh /app/bin/tropy
       - |
         npm install --ignore-scripts
