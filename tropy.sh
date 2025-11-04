@@ -1,10 +1,13 @@
 #!/bin/bash
 
+EXTRA_ARGS=()
 
-WAYLAND_SOCKET=${WAYLAND_DISPLAY:-"wayland-0"}
-
-if [[ -e "$XDG_RUNTIME_DIR/${WAYLAND_SOCKET}" ]]; then
-  FLAGS="--ozone-platform-hint=auto"
+if [[ ${XDG_SESSION_TYPE:-} == "wayland" ]]; then
+    EXTRA_ARGS+=(
+      "--ozone-platform-hint=auto"
+      "--enable-wayland-ime"
+      "--wayland-text-input-version=3"
+    )
 fi
 
-exec zypak-wrapper /app/tropy "$FLAGS" "$@"
+exec zypak-wrapper /app/tropy "${EXTRA_ARGS[@]}" "$@"

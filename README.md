@@ -11,5 +11,4 @@ Tropy requests the following restricted permissions:
 ## Update sources notes
     - Fetch and unpack the Tropy sources outside of the sandbox
     - Run `flatpak-node-generator --electron-node-headers --electron-ffmpeg=lib npm package-lock.json`
-    - Fix node-gyp cache install version from 9 to 11
-    - Fix electron cache link to SHASUMS256.txt
+    - Fix node-gyp cache installVersion from 9 to 11
