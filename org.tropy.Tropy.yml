@@ -193,6 +193,8 @@ modules:
         path: 001.electron-got-checksum.patch
       - type: file
         path: 002.metainfo.patch
+      - type: file
+        path: 003.empty-args.patch
     subdir: tropy
     build-commands:
       - install -Dm755 ../tropy.sh /app/bin/tropy
@@ -205,6 +207,7 @@ modules:
       - |
         patch -p 1 < ../001.electron-got-checksum.patch
         patch -p 1 < ../002.metainfo.patch
+        patch -p 1 < ../003.empty-args.patch
       - npm run build
       - |
         cd dist/Tropy-linux-*
