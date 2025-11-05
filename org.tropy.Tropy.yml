@@ -1,19 +1,17 @@
 app-id: org.tropy.Tropy
 base: org.electronjs.Electron2.BaseApp
-base-version: '23.08'
+base-version: '25.08'
 runtime: org.freedesktop.Platform
-runtime-version: '23.08'
+runtime-version: '25.08'
 sdk: org.freedesktop.Sdk
 sdk-extensions:
-  - org.freedesktop.Sdk.Extension.node18
+  - org.freedesktop.Sdk.Extension.node22
 command: tropy
 
 finish-args:
   - --share=ipc
   - --socket=wayland
   - --socket=fallback-x11
-  #- --socket=x11
-  #- --socket=pulseaudio
   - --share=network
   - --device=dri
   - --filesystem=home
@@ -21,7 +19,8 @@ finish-args:
   - --filesystem=/run/media
   - --filesystem=xdg-run/gvfsd
   - --talk-name=org.gtk.vfs.*
-  #- --talk-name=org.freedesktop.Notifications
+  # Use same mouse cursors as host
+  - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
 
 cleanup:
   - /include
@@ -47,8 +46,8 @@ modules:
       - -DCONFIG_WEBM_IO=0
     sources:
       - type: archive
-        url: https://storage.googleapis.com/aom-releases/libaom-3.7.0.tar.gz
-        sha256: d1773bb6f050b430af47741306ac37a6aa2fec7364cb0dc27e3b1454a138934f
+        url: https://storage.googleapis.com/aom-releases/libaom-3.13.1.tar.gz
+        sha256: 19e45a5a7192d690565229983dad900e76b513a02306c12053fb9a262cbeca7d
 
   - name: openjpeg
     builddir: true
@@ -60,8 +59,8 @@ modules:
       - /lib/openjpeg-*
     sources:
       - type: archive
-        url: https://github.com/uclouvain/openjpeg/archive/v2.5.0.tar.gz
-        sha256: 0333806d6adecc6f7a91243b2b839ff4d2053823634d4f6ed7a59bc87409122a 
+        url: https://github.com/uclouvain/openjpeg/archive/v2.5.4.tar.gz
+        sha256: a695fbe19c0165f295a8531b1e4e855cd94d0875d2f88ec4b61080677e27188a
 
   - name: libimagequant
     builddir: true
@@ -69,7 +68,7 @@ modules:
     sources:
       - type: archive
         url: https://github.com/lovell/libimagequant/archive/v2.4.1.tar.gz
-        sha256: 9a808f7dde0b3b9a51632ec903b8a36f4342b95e66496c0919b3619cf03e022f
+        sha256: da531249038e17f0674cef6e5d4100e43bf8cdfb4f330bc2a590bff50cd91913
 
   - name: libspng
     builddir: true
@@ -89,8 +88,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/strukturag/libde265/releases/download/v1.0.12/libde265-1.0.12.tar.gz
-        sha256: 62185ea2182e68cf68bba20cc6eb4c287407b509cf0a827d7ddb75614db77b5c
+        url: https://github.com/strukturag/libde265/releases/download/v1.0.16/libde265-1.0.16.tar.gz
+        sha256: b92beb6b53c346db9a8fae968d686ab706240099cdd5aff87777362d668b0de7
   - name: libheif
     cleanup:
       - /lib/cmake
@@ -104,8 +103,8 @@ modules:
       - -DWITH_X265=OFF
     sources:
       - type: archive
-        url: https://github.com/strukturag/libheif/releases/download/v1.16.2/libheif-1.16.2.tar.gz
-        sha256: 7f97e4205c0bd9f9b8560536c8bd2e841d1c9a6d610401eb3eb87ed9cdfe78ea
+        url: https://github.com/strukturag/libheif/releases/download/v1.20.2/libheif-1.20.2.tar.gz
+        sha256: 68ac9084243004e0ef3633f184eeae85d615fe7e4444373a0a21cebccae9d12a
 
   - name: cgif
     builddir: true
@@ -114,8 +113,8 @@ modules:
       - --buildtype=release
     sources:
       - type: archive
-        url: https://github.com/dloebl/cgif/archive/V0.3.2.tar.gz
-        sha256: 0abf83b7617f4793d9ab3a4d581f4e8d7548b56a29e3f95b0505f842cbfd7f95
+        url: https://github.com/dloebl/cgif/archive/refs/tags/v0.5.0.tar.gz
+        sha256: d6cb312c7da2c6c9f310811aa3658120c0316ba130c48a012e7baf3698920fe9
 
   - name: poppler-data
     builddir: true
@@ -144,8 +143,8 @@ modules:
       - /share/gir-1.0
     sources:
       - type: archive
-        url: https://poppler.freedesktop.org/poppler-23.10.0.tar.xz
-        sha256: 31a3dfdea79f4922402d313737415a44d44dc14d6b317f959a77c5bba0647dd9
+        url: https://poppler.freedesktop.org/poppler-25.10.0.tar.xz
+        sha256: 6b5e9bb64dabb15787a14db1675291c7afaf9387438cc93a4fb7f6aec4ee6fe0
 
   - name: libvips
     builddir: true
@@ -153,7 +152,8 @@ modules:
     config-opts:
       - --buildtype=release
       - -Ddeprecated=false
-      - -Dintrospection=false
+      - -Dexamples=false
+      - -Dintrospection=disabled
       - -Dmodules=disabled
       - -Dppm=false
       - -Danalyze=false
@@ -163,41 +163,51 @@ modules:
       - /share/man
     sources:
       - type: archive
-        url: https://github.com/libvips/libvips/releases/download/v8.14.5/vips-8.14.5.tar.xz
-        sha256: 90374e9f6fbd5657b5faf306cacda20658d6144d385316b59b865bc1a487b68d
+        url: https://github.com/libvips/libvips/releases/download/v8.17.3/vips-8.17.3.tar.xz
+        sha256: 41e9a1439cd57dcc6d4435a085e2cfe181d9da1962fa84a484f09e8b536e4b77
 
   - name: tropy
     buildsystem: simple
     build-options:
-      append-path: /usr/lib/sdk/node18/bin
+      append-path: /usr/lib/sdk/node22/bin
       env:
+        SHARP_FORCE_GLOBAL_LIBVIPS: 'true'
         XDG_CACHE_HOME: /run/build/tropy/flatpak-node/cache
-        npm_config_cache: /run/build/tropy/flatpak-node/npm-cache
-        npm_config_loglevel: info
-        npm_config_offline: 'true'
-        npm_config_audit: 'false'
-        npm_config_fund: 'false'
+        NPM_CONFIG_CACHE: /run/build/tropy/flatpak-node/npm-cache
+        NPM_CONFIG_LOGLEVEL: info
+        NPM_CONFIG_OFFLINE: 'true'
+        NPM_CONFIG_AUDIT: 'false'
+        NPM_CONFIG_FUND: 'false'
     sources:
       - type: archive
-        url: https://github.com/tropy/tropy/archive/refs/tags/v1.16.2.tar.gz
-        sha256: 03cad845625f6ae8e44cba1add522090212bf1c4607f51b234b375eda56054de
+        url: https://github.com/tropy/tropy/archive/refs/tags/v1.17.1.tar.gz
+        sha256: 4a653b5ef0a8258fd8d104addb28f96ba58cde907be772e3e59a06b4d965dfbc
         dest: tropy
       - type: file
-        url: https://www.sqlite.org/2023/sqlite-autoconf-3430200.tar.gz
-        sha256: 6d422b6f62c4de2ca80d61860e3a3fb693554d2f75bb1aaca743ccc4d6f609f0
+        url: https://www.sqlite.org/2025/sqlite-autoconf-3480000.tar.gz
+        sha256: ac992f7fca3989de7ed1fe99c16363f848794c8c32a158dafd4eb927a2e02fd5
       - generated-sources.json
       - type: file
         path: tropy.sh
+      - type: file
+        path: 001.electron-got-checksum.patch
+      - type: file
+        path: 002.metainfo.patch
+      - type: file
+        path: 003.empty-args.patch
     subdir: tropy
     build-commands:
       - install -Dm755 ../tropy.sh /app/bin/tropy
       - |
         npm install --ignore-scripts
-        node node_modules/electron/install
+        node node_modules/electron/install.js
       - |
         mv ../sqlite-autoconf* node_modules/sqlite3/deps
-        node scripts/rebuild --skip-headers sqlite3
-        npx node-gyp rebuild --target=28.2.5 --verbose -C node_modules/sharp
+        node scripts/rebuild.js --skip-headers -f sharp sqlite3
+      - |
+        patch -p 1 < ../001.electron-got-checksum.patch
+        patch -p 1 < ../002.metainfo.patch
+        patch -p 1 < ../003.empty-args.patch
       - npm run build
       - |
         cd dist/Tropy-linux-*
