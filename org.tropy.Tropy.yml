@@ -191,6 +191,8 @@ modules:
         path: tropy.sh
       - type: file
         path: 001.electron-got-checksum.patch
+      - type: file
+        path: 002.metainfo.patch
     subdir: tropy
     build-commands:
       - install -Dm755 ../tropy.sh /app/bin/tropy
@@ -202,7 +204,8 @@ modules:
         node scripts/rebuild.js --skip-headers -f sharp sqlite3
       - |
         patch -p 1 < ../001.electron-got-checksum.patch
-        npm run build
+        patch -p 1 < ../002.metainfo.patch
+      - npm run build
       - |
         cd dist/Tropy-linux-*
         install -Dm644 -t /app/share/metainfo org.tropy.Tropy.metainfo.xml
