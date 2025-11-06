@@ -12,13 +12,25 @@ finish-args:
   - --share=ipc
   - --socket=wayland
   - --socket=fallback-x11
+  # Network access
   - --share=network
+  # Printing
+  - --socket=cups
+  # WebGL / WebGPU
   - --device=dri
+  # Secrets storage
+  #- --talk-name=org.freedesktop.secrets
+  # Idle detection
+  - --talk-name=org.gnome.Mutter.IdleMonitor
+  # Needed to access project files
   - --filesystem=home
+  # External drive access
   - --filesystem=/media
   - --filesystem=/run/media
-  - --filesystem=xdg-run/gvfsd
+  - --filesystem=/mnt
+  # gvfs access
   - --talk-name=org.gtk.vfs.*
+  - --filesystem=xdg-run/gvfsd
   # Use same mouse cursors as host
   - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
 
