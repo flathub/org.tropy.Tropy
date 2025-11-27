@@ -1,5 +1,5 @@
 diff --git a/scripts/build.js b/scripts/build.js
-index e9e3ca0ab..e184c6036 100644
+index e9e3ca0ab..4730d22be 100644
 --- a/scripts/build.js
 +++ b/scripts/build.js
 @@ -237,6 +237,12 @@ export function configure({ arch, platform, out = join(ROOT, 'dist') }) {
@@ -9,8 +9,8 @@ index e9e3ca0ab..e184c6036 100644
 +    },
 +    download: {
 +      checksums: {
-+        "electron-v38.5.0-linux-arm64.zip": "d4939648feef4969d49eed845852a13a52ef0d0703bebcd20fade2a198a88080",
-+        "electron-v38.5.0-linux-x64.zip": "b4c5b139a11816da7d703a6e2d03369ad1425e4fa5a8b6ed1d6cb42ce7775821"
++        "electron-v39.2.3-linux-arm64.zip": "c58c5904d6015cbbfa5f04fbda5c83b9a276a3565b5f3fa166795c789b055cdd",
++        "electron-v39.2.3-linux-x64.zip": "5eb51ebcb60487c4fc3a5b74ffb57a03eefd48def32200adf310ffaba4153d64"
 +      }
      }
    }

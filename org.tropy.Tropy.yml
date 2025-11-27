@@ -12,13 +12,26 @@ finish-args:
   - --share=ipc
   - --socket=wayland
   - --socket=fallback-x11
+  # Network access
   - --share=network
+  # Printing
+  - --socket=cups
+  # WebGL / WebGPU
   - --device=dri
+  # Secrets storage
+  #- --talk-name=org.freedesktop.secrets
+  # Idle detection
+  - --talk-name=org.gnome.Mutter.IdleMonitor
+  # Needed to access project files
   - --filesystem=home
+  # External drive access
   - --filesystem=/media
   - --filesystem=/run/media
-  - --filesystem=xdg-run/gvfsd
+  - --filesystem=/mnt
+  # gvfs access
   - --talk-name=org.gtk.vfs.*
+  - --filesystem=xdg-run/gvfs
+  - --filesystem=xdg-run/gvfsd
   # Use same mouse cursors as host
   - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
 
@@ -180,8 +193,8 @@ modules:
         NPM_CONFIG_FUND: 'false'
     sources:
       - type: archive
-        url: https://github.com/tropy/tropy/archive/refs/tags/v1.17.1.tar.gz
-        sha256: 4a653b5ef0a8258fd8d104addb28f96ba58cde907be772e3e59a06b4d965dfbc
+        url: https://github.com/tropy/tropy/archive/refs/tags/v1.17.2.tar.gz
+        sha256: a14cb408ad7a6c2c87be68200d18795e9bbdf20711e223212b9f8d6fb8a22cb6
         dest: tropy
       - type: file
         url: https://www.sqlite.org/2025/sqlite-autoconf-3480000.tar.gz
@@ -191,10 +204,6 @@ modules:
         path: tropy.sh
       - type: file
         path: 001.electron-got-checksum.patch
-      - type: file
-        path: 002.metainfo.patch
-      - type: file
-        path: 003.empty-args.patch
     subdir: tropy
     build-commands:
       - install -Dm755 ../tropy.sh /app/bin/tropy
@@ -206,8 +215,6 @@ modules:
         node scripts/rebuild.js --skip-headers -f sharp sqlite3
       - |
         patch -p 1 < ../001.electron-got-checksum.patch
-        patch -p 1 < ../002.metainfo.patch
-        patch -p 1 < ../003.empty-args.patch
       - npm run build
       - |
         cd dist/Tropy-linux-*
