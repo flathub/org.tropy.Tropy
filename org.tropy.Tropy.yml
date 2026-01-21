@@ -174,8 +174,8 @@ modules:
         NPM_CONFIG_FUND: 'false'
     sources:
       - type: archive
-        url: https://github.com/tropy/tropy/archive/refs/tags/v1.17.2.tar.gz
-        sha256: a14cb408ad7a6c2c87be68200d18795e9bbdf20711e223212b9f8d6fb8a22cb6
+        url: https://github.com/tropy/tropy/archive/refs/tags/v1.17.3.tar.gz
+        sha256: 87965f3526512e465e89997fbb1522e35183f8de65f48d5d746cc67b1a799a4f
         dest: tropy
       - type: file
         url: https://www.sqlite.org/2025/sqlite-autoconf-3480000.tar.gz
