@@ -43,25 +43,6 @@ cleanup:
   - /share/pkgconfig
 
 modules:
-  - name: aom
-    builddir: true
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DENABLE_DOCS=0
-      - -DENABLE_TESTS=0
-      - -DENABLE_TESTDATA=0
-      - -DENABLE_TOOLS=0
-      - -DENABLE_EXAMPLES=0
-      - -DENABLE_NASM=1
-      - -DENABLE_NEON=1
-      - -DCONFIG_PIC=1
-      - -DCONFIG_AV1_HIGHBITDEPTH=0
-      - -DCONFIG_WEBM_IO=0
-    sources:
-      - type: archive
-        url: https://storage.googleapis.com/aom-releases/libaom-3.13.1.tar.gz
-        sha256: 19e45a5a7192d690565229983dad900e76b513a02306c12053fb9a262cbeca7d
-
   - name: openjpeg
     builddir: true
     buildsystem: cmake-ninja
