@@ -43,18 +43,6 @@ cleanup:
   - /share/pkgconfig
 
 modules:
-  - name: openjpeg
-    builddir: true
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DBUILD_CODEC=OFF
-    cleanup:
-      - /bin
-      - /lib/openjpeg-*
-    sources:
-      - type: archive
-        url: https://github.com/uclouvain/openjpeg/archive/v2.5.4.tar.gz
-        sha256: a695fbe19c0165f295a8531b1e4e855cd94d0875d2f88ec4b61080677e27188a
 
   - name: libimagequant
     builddir: true
@@ -84,21 +72,6 @@ modules:
       - type: archive
         url: https://github.com/strukturag/libde265/releases/download/v1.0.16/libde265-1.0.16.tar.gz
         sha256: b92beb6b53c346db9a8fae968d686ab706240099cdd5aff87777362d668b0de7
-  - name: libheif
-    cleanup:
-      - /lib/cmake
-      - /share/thumbnailers
-    builddir: true
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DENABLE_PLUGIN_LOADING=OFF
-      - -DWITH_EXAMPLES=OFF
-      - -DWITH_LIBDE265=ON
-      - -DWITH_X265=OFF
-    sources:
-      - type: archive
-        url: https://github.com/strukturag/libheif/releases/download/v1.20.2/libheif-1.20.2.tar.gz
-        sha256: 68ac9084243004e0ef3633f184eeae85d615fe7e4444373a0a21cebccae9d12a
 
   - name: cgif
     builddir: true
