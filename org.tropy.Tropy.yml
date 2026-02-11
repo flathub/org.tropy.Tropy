@@ -139,9 +139,6 @@ modules:
         url: https://github.com/tropy/tropy/archive/refs/tags/v1.17.3.tar.gz
         sha256: 87965f3526512e465e89997fbb1522e35183f8de65f48d5d746cc67b1a799a4f
         dest: tropy
-      - type: file
-        url: https://www.sqlite.org/2025/sqlite-autoconf-3480000.tar.gz
-        sha256: ac992f7fca3989de7ed1fe99c16363f848794c8c32a158dafd4eb927a2e02fd5
       - generated-sources.json
       - type: file
         path: tropy.sh
